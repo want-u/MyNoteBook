@@ -1,0 +1,6 @@
+Windows Registry Editor Version 5.00
+[HKEY_CLASSES_ROOT\Directory\Background\shell\NoteBook]
+@="NoteBook"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\NoteBook\command]
+@="C:\Program Files\Git\git-bash.exe -c "cd /d/MyNoteBook && git add -A && git commit -m "make a commit" && git pull origin master && git push origin master""

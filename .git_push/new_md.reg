@@ -1,0 +1,22 @@
+<<<<<<< HEAD
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\.md]
+@="typora.md"
+
+[HKEY_CLASSES_ROOT\.md\OpenWithProgids]
+"Typora.md"=""
+
+[HKEY_CLASSES_ROOT\.md\ShellNew]
+=======
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\.md]
+@="typora.md"
+
+[HKEY_CLASSES_ROOT\.md\OpenWithProgids]
+"Typora.md"=""
+
+[HKEY_CLASSES_ROOT\.md\ShellNew]
+>>>>>>> 55bdf98f2e666f0992ead6e5e4d02be4a33c588b
+"NullFile"=""
