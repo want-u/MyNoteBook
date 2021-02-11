@@ -474,3 +474,135 @@ public class SwitchExercise {
 
 1. 如果判断的具体数值不多，而且符合byte，short，int，char，enum，String这6中类型，推荐使用switch
 2. 其他情况：对区间的判断，对结果为boolean类型的判断，使用if，if的使用范围更广
+
+## for 循环控制
+
+### 基本介绍
+
+就是让你的代码可以循环的执行
+
+案例：打印10句 "你好，韩顺平教育！"
+
+基本语法：
+
+> for (循环变量初始化; 循环条件; 循环变量迭代) {
+> 	循环操作(语句块);
+> }
+
+```
+public class For01 {
+	public static void main(String[] args) {
+		// 打印10句 "你好，韩顺平教育！"
+		for (int i = 1; i <= 10; i++) {
+			System.out.println("你好，韩顺平教育！" + i);
+		}
+	}
+}
+```
+
+老韩说明：
+
+1. for 关键字：表示循环控制
+2. for 有四要素：
+   1. 循环变量初始化
+   2. 循环条件
+   3. 循环操作
+   4. 循环变量迭代
+3. 循环操作：这里可以有多条语句，也就是我们要循环的代码
+4. 如果循环操作只有一条语句，可以省略{}，建议不省略
+
+### 流程分析
+
+![image-20210211220259949](https://gitee.com/luoxian1011/pictures/raw/master/image-20210211220259949.png)
+
+![image-20210211220403711](https://gitee.com/luoxian1011/pictures/raw/master/image-20210211220403711.png)
+
+### 使用细节
+
+1. 循环条件是返回一个布尔值的表达式
+2. for (; 循环判断条件 ;)中的初始化和变量迭代可以放到其他地方，但是两边的分号不能省略
+3. 循环初始值 和 循环变量迭代 可以有多条初始化语句，但要求类型一样，并且中间用逗号隔开
+
+```
+public class For01Detail {
+	public static void main(String[] args) {
+		// for (; 循环判断条件 ;)中的初始化和变量迭代可以放到其他地方，但是两边的分号不能省略
+		int i = 1;
+		for (; i <= 10 ; ) {
+			System.out.println("hello" + i);
+			i++;
+		}
+		System.out.println(i); // i = 11
+
+		// 循环初始值 和 循环变量迭代 可以有多条初始化语句，但要求类型一样，并且中间用逗号隔开
+		// int count = 3;
+		// for (int i = 0, j = 0; i < count; i++, j += 2) {
+		// 	System.out.println("i=" + i + " j=" + j);
+		// 输出
+		// i=0 j=0
+		// i=1 j=2
+		// i=2 j=4
+		// }
+
+		// 无限循环，可以配合break使用
+		for (; ; ) {
+			System.out.println(i);
+			i++;
+		}
+	}
+}
+```
+
+### 课堂练习
+
+```
+public class ForExercise {
+	public static void main(String[] args) {
+		/*
+		打印1~100之间所有是9的倍数的整数，统计个数及总和
+		
+		编程思想：[化繁为简，先死后活]
+		1. 化繁为简：即将复杂的需求，拆解成简单的需求，逐步完成
+		2. 先死后活：先考虑固定的值，然后转成可以灵活变化的值
+		思路分析
+		1. 输出 1-100 的值
+		2. 在输出的过程，进行过滤，只输出9的倍数 i % 9 == 0
+		3. 统计个数，定义变量 int count = 0; 当条件满足时 count++;
+		4. 总和，定义变量 int sum = 0; 当条件满足时 sum += i;
+		*/
+		int start = 1; // 开始值
+		int end = 100; // 结束值
+		int t = 9;     // 倍数值
+
+		int count = 0; // 统计个数
+		int sum = 0;   // 统计总和
+		for (int i = start; i <= end ; i++) {
+			if (i % t == 0) {
+				count++;
+				sum += i;
+				System.out.println("i=" + i);
+			}
+		}
+		System.out.println("count=" + count);
+		System.out.println("sum=" + sum);
+	}
+}
+```
+
+```
+public class ForExercise01 {
+	public static void main(String[] args) {
+		// 完成输出两个数相加为5
+		// 化繁为简：
+		// 1. 输出 1~5
+		// 2. 后面的 + 是 5 - i
+		// 先死后活
+		// 1. 将5 替换为变量
+		int num = 5;
+		for (int i = 0; i <=num ;i++ ) {
+			System.out.println(i + " + " + (num-i) + " = " + num);
+		}
+	}
+}
+```
+

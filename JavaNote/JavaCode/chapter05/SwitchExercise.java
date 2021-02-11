@@ -71,6 +71,6 @@ public class SwitchExercise {
 				System.out.println("冬季");
 			default :
 				System.out.println("月份输入有误");
-		} 
+		}
 	}
 }
