@@ -606,3 +606,75 @@ public class ForExercise01 {
 }
 ```
 
+## while 循环控制
+
+### 基本介绍
+
+基本语法：
+
+> 循环变量初始化;
+> while (循环条件) {
+> 	循环体(语句);
+> 	循环变量迭代;
+> }
+
+说明：while 循环也有四要素，只是位置不同
+
+```
+public class While01 {
+	public static void main(String[] args) {
+		// while 循环实例
+
+		// 输出10句："你好，韩顺平教育"
+
+		int i = 1; // 循环变量初始化
+		while (i <= 10) {
+			System.out.println("你好，韩顺平教育" + i);
+			i++;
+		}
+		System.out.println("退出while，继续...");
+	}
+}
+```
+
+
+
+### 流程分析
+
+![image-20210212212819880](https://gitee.com/luoxian1011/pictures/raw/master/image-20210212212819880.png)
+
+![image-20210212221532399](https://gitee.com/luoxian1011/pictures/raw/master/image-20210212221532399.png)
+
+### 使用细节
+
+1. 循环条件是返回一个布尔值的表达式
+2. while 循环是先判断再执行语句
+
+```
+public class WhileExercise {
+	public static void main(String[] args) {
+		// 打印1~100之间所有能被3整除的数
+		int i = 1;
+		int end = 100;
+		int t = 3;
+		while (i <= end) {
+			if (i % t == 0) {
+				System.out.println("i=" + i);
+			}
+			i++;
+		}
+
+		System.out.println("==========");
+		
+		// 打印40~200之间所有偶数
+		int j = 40;
+		while (j <= 200) {
+			if (j % 2 == 0) {
+				System.out.println("j=" + j);
+			}
+			j++;
+		}
+	}
+}
+```
+
