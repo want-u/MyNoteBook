@@ -678,3 +678,100 @@ public class WhileExercise {
 }
 ```
 
+## do..while 循环控制
+
+### 基本介绍
+
+基本语法：
+
+> do {
+> 	循环体(语句);
+> 	循环变量迭代;
+> } while (循环条件);
+
+老韩说明：
+
+1. do while 是关键字
+2. 也有循环四要素，只是位置不一样
+3. 先执行，再判断，至少会执行一次
+4. 最后有一个分号;
+5. while 和do while 区别举例：要账
+
+### 流程分析
+
+![](https://gitee.com/luoxian1011/pictures/raw/master/image-20210213182944190.png)
+
+![image-20210213183337434](https://gitee.com/luoxian1011/pictures/raw/master/image-20210213183337434.png)
+
+```
+public class DoWhile01 {
+	public static void main(String[] args) {
+		// do while 实例
+		// 输出10句："你好！"
+		int i = 1;
+		do {
+			System.out.println("你好！" + i);
+			i++;
+		} while (i <= 10);
+		System.out.println("退出do .. while, 程序继续");
+	}
+}
+```
+
+### 使用细节
+
+1. 循环条件是返回一个布尔值的表达式
+2. do...while 循环是先执行，再判断，因此它至少执行一次
+
+```
+public class DoWhileExercise01 {
+	public static void main(String[] args) {
+		// 打印1~100
+		// int i = 1;
+		// do {
+		// 	System.out.println(i);
+		// 	i++;
+		// } while (i <= 100);
+
+		// 计算1~100的和
+		// int i = 1;
+		// int sum = 0;
+		// do {
+		// 	System.out.println(i);
+		// 	sum += i;
+		// 	i++;
+		// } while (i <= 100);
+		// System.out.println("sum=" + sum);
+
+		// 统计1~200之间能被5整除但不能被3整除的个数
+		int i = 1;
+		int count = 0;
+		do {
+			if (i % 5 == 0 && i % 3 != 0) {
+				// System.out.println(i);
+				count++;
+			}
+			i++;
+		} while (i <= 200);
+		System.out.println("count=" + count); // 27
+	}
+}
+```
+
+```
+import java.util.Scanner;
+public class DoWhileExercise02 {
+	public static void main(String[] args) {
+		// 如果李三不还钱，则老韩将一直使出五连鞭，直到李三说还钱为止
+		Scanner myScanner = new Scanner(System.in);
+		char answer;
+		do {
+			System.out.println("老韩问使出五连鞭！！！");
+			System.out.println("老韩问：还钱吗？ y/n：");
+			answer = myScanner.next().charAt(0);
+		} while (answer != 'y');
+		System.out.println("李三还钱了 ...");
+	}
+}
+```
+
