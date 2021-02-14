@@ -1,3 +1,4 @@
+			System.out.println("老韩问：还钱吗？ y/n：");
 import java.util.Scanner;
 public class DoWhileExercise02 {
 	public static void main(String[] args) {
