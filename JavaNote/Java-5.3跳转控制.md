@@ -233,3 +233,181 @@ public class Return01 {
 }
 ```
 
+## 本章作业
+
+```
+public class Homework01 {
+	public static void main(String[] args) {
+		/*
+		某人有100，000元，每经过一次路口，需要缴费，规则如下：
+		1. 当现金 > 50000时，每次交 5%
+		2. 当现金 <= 50000时，每次交1000
+		计算该人可以经过多少次路口【while + break】
+		*/
+		double money = 100000;
+		int count = 0;
+		while (true) {
+
+			if (money > 50000) {
+				money *= 0.95;
+				count++;
+				System.out.println("大于50000：" + money);
+
+			} else if (money >= 1000) {
+				money -= 1000;
+				count++;
+				System.out.println("小于50000：" + money);
+
+			} else {
+				break;
+			}
+		}
+		System.out.println("没钱了...：" + money);
+		System.out.println(count);
+	}
+}
+```
+
+```
+public class Homework02 {
+	public static void main(String[] args) {
+		// 实现判断一个整数，属于哪个范围：大于0；小于0；等于0
+		int num = 0;
+		if (num > 0) {
+			System.out.println(num + "大于0");
+		} else if (num < 0) {
+			System.out.println(num + "小于0");
+		} else {
+			System.out.println(num + "等于0");
+		}
+	}
+}
+```
+
+```
+public class Homework03 {
+	public static void main(String[] args) {
+		// 判断一个年份是否为闰年
+		int year = 2000;
+		if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+			System.out.println(year + "是闰年");
+		} else {
+			System.out.println(year + "不是闰年");
+		}
+	}
+}
+```
+
+```
+public class Homework04 {
+	public static void main(String[] args) {
+		// 判断一个整数是否是水仙花数，所谓水仙花数
+		// 是指:一个3位数，其各个位数上数字的立方和等于其本身
+		// 例如：153 = 1*1*1 + 3*3*3 + 5*5*5
+		int num = 257;
+		int num1 = num / 100;
+		int num2 = num % 100 / 10;
+		int num3 = num % 10;
+		System.out.println(num1);
+		System.out.println(num2);
+		System.out.println(num3);
+
+		int sum = num1 * num1 * num1 + num2 * num2 * num2 + num3 * num3 * num3;
+		if (num == sum) {
+			System.out.println(sum);
+			System.out.println(num + "水仙花数");
+		} else {
+			System.out.println(num + "不是水仙花数");
+		}
+	}
+}
+```
+
+```
+public class Homework05 {
+	public static void main(String[] args) {
+		// 看看以下代码输出什么 输出空
+		int m = 0, n = 3;
+		if (m > 0) {
+			if (n > 2) {
+				System.out.println("OK1");
+			} else {
+				System.out.println("OK2");
+			}
+		}
+	}
+}
+```
+
+```
+public class Homework06 {
+	public static void main(String[] args) {
+		// 输出1~100之间的 不能被5整除的数，每5个一行
+		int count = 0;
+		for (int i = 1; i <= 100; i++) {
+			if (i % 5 != 0) {
+				System.out.print(i + "\t");
+				count++;
+				if (count % 5 == 0) {
+					System.out.println();
+				}
+			}
+		}
+	}
+}
+```
+
+```
+public class Homework07 {
+	public static void main(String[] args) {
+		// 输出小写的a-z以及大写的Z-A
+		// a~z 97~122
+		// Z~A 90~65
+		// for (int i = 97; i <= 122; i++) {
+		// 	System.out.print((char)i);
+		// }
+		// for (int i = 90; i >= 65; i--) {
+		// 	System.out.print((char)i);
+		// }
+		for (char c1 = 'a'; c1 <= 'z'; c1++) {
+			System.out.print(c1);
+		}
+		for (char c1 = 'Z'; c1 >= 'A'; c1--) {
+			System.out.print(c1);
+		}
+	}
+}
+```
+
+```
+public class Homework08 {
+	public static void main(String[] args) {
+		// 求出1-1/2+1/3-1/4.。。1/100的和
+		double sum = 0;
+		for (int i = 1; i <= 100; i++) {
+			if (i % 2 != 0) {
+				sum += 1.0 / i;
+			} else {
+				sum -= 1.0 / i;
+			}
+		}
+		System.out.println(sum); // 0.688172179310195
+	}
+}
+```
+
+```
+public class Homework09 {
+	public static void main(String[] args) {
+		// 求出1 + (1+2) + (1+2+3) + ... + (1+2+3..+100)的结果
+		int sum = 0;
+		for (int i = 1; i <= 100; i++) {
+			for (int j = 1; j <= i; j++) {
+				sum += j;
+			}
+		}
+		System.out.println(sum); // 171700
+	}
+}
+```
+
