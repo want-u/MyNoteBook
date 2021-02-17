@@ -140,3 +140,96 @@ public class Break01 {
    ```
 
    
+
+## continue
+
+### 基本介绍
+
+1. continue 语句用于结束本次循环，继续执行下一次循环
+2. continue 语句出现在多层嵌套的循环语句体中时，可以通过标签指明要跳过的是哪一层循环，与前面的标签使用规则相同
+
+基本语法：
+
+```
+{	......
+	continue;
+	......
+}
+```
+
+流程图：
+
+![image-20210216175741820](https://gitee.com/luoxian1011/pictures/raw/master/image-20210216175741820.png)
+
+### 快速入门
+
+![image-20210216182520407](https://gitee.com/luoxian1011/pictures/raw/master/image-20210216182520407.png)
+
+```
+public class Continue01 {
+	public static void main(String[] args) {
+		// continue快速入门
+		int i = 1;
+		while (i <= 4) {
+			i++;
+			if (i == 2) {
+				continue;
+			}
+			System.out.println("i=" + i);
+		}
+	}
+}
+```
+
+### 细节说明
+
+```
+public class ContinueDetail {
+	public static void main(String[] args) {
+		// 细节使用案例
+		label1:
+		for (int j = 1; j <= 2; j++) {
+			label2:
+			for (int i = 1; i <= 4; i ++) {
+				if (i == 2) {
+					// continue;
+					// continue label2;
+					continue label1; // 输出两组[1 ]
+				}
+				System.out.println("i = " + i); // 输出两组[1 3 4]
+			}
+		}
+	}
+}
+```
+
+## return
+
+### 基本介绍
+
+return 使用在方法，表示跳出所在的方法，在讲解方法的时候，会详细介绍
+
+如果 return 写在 main 方法，则退出程序
+
+![image-20210216192639056](https://gitee.com/luoxian1011/pictures/raw/master/image-20210216192639056.png)
+
+![image-20210216192719601](https://gitee.com/luoxian1011/pictures/raw/master/image-20210216192719601.png)
+
+![image-20210216192803315](https://gitee.com/luoxian1011/pictures/raw/master/image-20210216192803315.png)
+
+```
+public class Return01 {
+	public static void main(String[] args) {
+		// return
+		for (int i = 1; i <= 5; i++) {
+			if (i == 3) {
+				System.out.println("韩顺平教育" + i);
+				return; // continue; break;
+			}
+			System.out.println("hello world");
+		}
+		System.out.println("go on ..");
+	}
+}
+```
+
