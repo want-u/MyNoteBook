@@ -7,6 +7,6 @@ public class Homework09 {
 				sum += j;
 			}
 		}
-		System.out.println(sum);
+		System.out.println(sum); // 171700
 	}
 }
