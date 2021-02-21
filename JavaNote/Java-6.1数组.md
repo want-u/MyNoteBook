@@ -311,3 +311,242 @@ public class ArrayCopy {
 ```
 
 ![image-20210219194931552](https://gitee.com/luoxian1011/pictures/raw/master/image-20210219194931552.png)
+
+### 数组反转
+
+要求：把数组的元素内容反转
+
+arr {11, 22, 33, 44, 55, 66} ==>  {66, 55, 44, 33, 22, 11}
+
+```
+public class ArrayReverse {
+	public static void main(String[] args) {
+		/*
+		数组的反转
+		arr {11, 22, 33, 44, 55, 66} ==>  {66, 55, 44, 33, 22, 11}
+		
+		1. 将arr[0] 和arr[5] 调换
+		2. 将arr[1] 和arr[4] 调换
+		3. 将arr[2] 和arr[3] 调换
+		4. 一共需要调换3次 = arr.length / 2
+		5. 若为奇数个，中间元素无须更改
+		6. 每次交换时，对应的下标是 arr[i] 和 arr[arr.length - 1 - i]
+		*/
+
+		// 定义数组
+		int[] arr = {11, 22, 33, 44, 55, 66};
+
+		int len = arr.length; // 数组的长度
+		int temp; // 声明临时变量
+
+		// 进行数组反转
+		for (int i = 0; i < len / 2; i++) {
+			temp = arr[i]; // 保存arr[i]的值
+			arr[i] = arr[len - 1 - i];
+			arr[len - 1 - i] = temp;
+		}
+
+		// 输出数组
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " "); // 66 55 44 33 22 11
+		}
+	}
+}
+```
+
+
+
+```
+public class ArrayReverse02 {
+	public static void main(String[] args) {
+		// 数组反转：逆序赋值法
+		// 思路：
+		// 1. 先创建一个新的数组arr2，大小 = arr.length
+		// 2. 逆序遍历arr，将每个元素拷贝到arr2中（顺序拷贝）
+		// 3. 建议增加一个循环变量j -> 0 -> 5
+
+		int[] arr = {11, 22, 33, 44, 55, 66};
+
+		// 创建一个新数组，长度与arr相同
+		int[] arrNew = new int[arr.length];
+
+		// 逆序遍历arr
+		for (int i = arr.length - 1, j = 0; i >= 0; i--, j++) {
+			arrNew[j] = arr[i];
+		}
+
+		// 将arr 指向arrNew 的数据空间
+		// 此时arr原来的数据空间就没有变量引用，会被当做垃圾销毁
+		arr = arrNew;
+
+		// 输出数组
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+	}
+}
+```
+
+![image-20210221105410589](https://gitee.com/luoxian1011/pictures/raw/master/image-20210221105410589.png)
+
+![image-20210221105854775](https://gitee.com/luoxian1011/pictures/raw/master/image-20210221105854775.png)
+
+### 数组添加
+
+要求：实现动态的给数组添加元素效果，实现对数组的扩容
+
+1. 原始数组使用静态分配 int[] arr = {1, 2, 3};
+
+2. 增加的元素，直接放在数组的最后 arr = {1, 2, 3, 4};
+
+3. 用户可以通过如下方法来决定是否添加：
+
+   添加成功，是否继续？ y/n
+
+```
+public class ArrayAdd {
+	public static void main(String[] args) {
+		/*
+		要求：实现动态的给数组添加元素效果，实现对数组的扩容
+		1. 原始数组使用静态分配 int[] arr = {1, 2, 3};
+		2. 增加的元素，直接放在数组的最后 arr = {1, 2, 3, 4};
+		3. 用户可以通过如下方法来决定是否添加：
+		   添加成功，是否继续？ y/n
+
+		思路分析：
+		1. 定义初始数组 int[] arr = {1, 2, 3};
+		2. 定义一个新数组 int[] arrNew = new int[arr.length + 1];
+		3. 遍历arr数组，依次将arr的元素拷贝到arrNew
+		4. 将 4 赋给 arrNew的最后一个元素
+		5. 让 arr 指向 arrNew [arr原始数据会被销毁]
+		*/
+		// 定义数组
+		int[] arr = {1, 2, 3};
+
+		// 新建一个数组，开辟数据空间，大小 = arr.length + 1
+		int[] arrNew = new int[arr.length + 1];
+
+		// 遍历arr数组
+		for (int i = 0; i < arr.length; i++) {
+			arrNew[i] = arr[i];
+		}
+
+		// 添加元素
+		arrNew[arrNew.length - 1] = 4;
+
+		// 将arr指向arrNew的数据空间
+		arr = arrNew;
+
+		// 输出数组
+		System.out.println("====数组的元素====");
+		for (int i = 0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+
+	}
+}
+```
+
+```
+import java.util.Scanner;
+public class ArrayAdd02 {
+	public static void main(String[] args) {
+		/*
+		要求：实现动态的给数组添加元素效果，实现对数组的扩容
+		1. 原始数组使用静态分配 int[] arr = {1, 2, 3};
+		2. 增加的元素，直接放在数组的最后 arr = {1, 2, 3, 4};
+		3. 用户可以通过如下方法来决定是否添加：
+		   添加成功，是否继续？ y/n
+
+		思路分析：
+		1. 定义初始数组 int[] arr = {1, 2, 3};
+		2. 定义一个新数组 int[] arrNew = new int[arr.length + 1];
+		3. 遍历arr数组，依次将arr的元素拷贝到arrNew
+		4. 将 4 赋给 arrNew的最后一个元素
+		5. 让 arr 指向 arrNew [arr原始数据会被销毁]
+		6. 创建一个Scanner接收用户输入
+		7. 使用do ... while 循环 + break 控制
+		*/
+		Scanner myScanner = new Scanner(System.in);
+
+		// 定义数组
+		int[] arr = {1, 2, 3};
+
+		do {
+			// 新建一个数组，开辟数据空间，大小 = arr.length + 1
+			int[] arrNew = new int[arr.length + 1];
+
+			// 遍历arr数组
+			for (int i = 0; i < arr.length; i++) {
+				arrNew[i] = arr[i];
+			}
+
+			// 接收并添加元素
+			System.out.println("请输入要添加的元素：");
+			arrNew[arrNew.length - 1] = myScanner.nextInt();
+
+			// 将arr指向arrNew的数据空间
+			arr = arrNew;
+
+			// 输出数组
+			System.out.println("====数组的元素====");
+			for (int i = 0; i < arr.length; i++) {
+				System.out.print(arr[i] + " ");
+			}
+
+			// 判断用户是否继续
+			System.out.println("是否继续添加 y/n");
+			char key = myScanner.next().charAt(0);
+			if (key == 'n') {
+				break; // 退出
+			}
+		} while (true);
+
+	}
+}
+```
+
+### 数组缩减
+
+有一个数组 {1, 2, 3, 4, 5} ， 可以将该数组进行缩减，提示用户是否继续缩减，每次缩减最后那个元素，当只剩下最后一个元素时，提示不能再缩减
+
+```
+import java.util.Scanner;
+public class ArrayReduce {
+	public static void main(String[] args) {
+		Scanner myScanner = new Scanner(System.in);
+
+		// 数组缩减
+		int[] arr = {1, 2, 3, 4, 5};
+
+		do {
+			if (arr.length == 1) {
+				System.out.println("不能再缩减");
+				break;
+			}
+
+			int[] arrNew = new int[arr.length - 1];
+
+			for (int i = 0; i < arrNew.length; i++) {
+				arrNew[i] = arr[i];
+			}
+
+			arr = arrNew;
+
+			System.out.println("====数组的元素====");
+			for (int i = 0; i < arr.length; i++) {
+				System.out.print(arr[i] + " ");
+			}
+
+			System.out.println("是否继续 y/n");
+			if (myScanner.next().charAt(0) == 'n') {
+				break;
+			}
+
+		} while (true);
+
+
+	}
+}
+```
+
