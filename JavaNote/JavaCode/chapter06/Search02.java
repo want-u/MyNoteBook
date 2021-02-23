@@ -1,5 +1,18 @@
 public class Search02 {
 	public static void main(String[] args) {
+		/*
+		int[] arr = {1, 8, 10, 89, 99, 1000, 1234};
+		使用二分查找：10
+
+		1. left:0  right:6  mid: (0 + 6) / 2 = 3
+		   arr[3]: 89 > 8; // 向左继续查，right=mid - 1
+
+		2. left:0  right:2  mid: (0 + 2) / 2 = 1
+		   arr[3]: 8 < 10; // 向右继续查，left=mid + 1
+
+		3. left:2  right:3  mid: (2 + 3) / 2 = 2
+		   arr[3]: 10 == 10; // 找到
+		*/
 		int[] arr = {1, 8, 10, 89, 99, 1000, 1234};
 		int num = 99;
 
