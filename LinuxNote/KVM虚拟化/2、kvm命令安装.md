@@ -117,7 +117,7 @@ virt-install -n vm003 --memory 1024 --vcpus 1 -l /iso/centos7.iso --disk /kvm-vm
 --disk /kvm-vm/vm003.qcow2,format=qcow2,size=20,sparse  # 指定磁盘文件，sparse为疏密格式
 --graphics none                                         # 不使用图形化
 -x 'console=ttyS0'                                      # 转化到伪终端
---accelerate                                            # 安装优化`
+--accelerate                                            # 安装优化
 ```
 
 ```
