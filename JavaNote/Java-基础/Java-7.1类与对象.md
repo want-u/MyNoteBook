@@ -169,3 +169,70 @@ class Person {
 }
 ```
 
+## 对象
+
+### 创建对象
+
+1. 先声明，再创建
+
+   Cat cat;
+
+   cat = new Cat();
+
+2. 直接创建
+
+   Cat cat = new Cat();
+
+### 访问属性
+
+基本语法：对象名.属性名
+
+例如：cat.name; cat.age; cat.color
+
+### 内存分配机制
+
+类和对象的内存分配机制
+
+1. 栈：一般存放基本数据类型(局部变量)
+2. 堆：存放对象(Cat cat，数组等)
+3. 方法区：常量池(常量，比如字符串)，类加载信息
+4. 示意图 [Person (name, age)]
+
+![image-20210226121512091](https://gitee.com/luoxian1011/pictures/raw/master/image-20210226121512091.png)
+
+```
+public class Object03 {
+	public static void main(String[] args) {
+		Person p1 = new Person();
+		p1.age = 10;
+		p1.name = "小明";
+		Person p2 = p1; // 把p1赋给了p2
+		System.out.println(p2.age); // 10
+	}
+}
+
+
+class Person {
+	String name;
+	int age;
+}
+```
+
+### 对象创建过程
+
+Java创建对象的流程简单分析：
+
+> Person p = new Person();
+> p.name = "jack";
+> p.age = 10;
+
+1. 先加载Person类信息(属性和方法信息，只会加载一次)
+2. 在堆中分配空间，进行默认初始化
+3. 把地址赋给p，p就指向对象
+4. 进行指定初始化，比如 p.name = "jack"; p.age = 10;
+
+---
+
+看一个练习题，并分析画出内存布局图，进行分析
+
+![image-20210226123412178](https://gitee.com/luoxian1011/pictures/raw/master/image-20210226123412178.png)
