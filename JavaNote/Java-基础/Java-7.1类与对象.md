@@ -175,13 +175,16 @@ class Person {
 
 1. 先声明，再创建
 
+   ```
    Cat cat;
-
    cat = new Cat();
+   ```
 
 2. 直接创建
 
+   ```
    Cat cat = new Cat();
+   ```
 
 ### 访问属性
 
@@ -222,9 +225,11 @@ class Person {
 
 Java创建对象的流程简单分析：
 
-> Person p = new Person();
-> p.name = "jack";
-> p.age = 10;
+```
+Person p = new Person();
+p.name = "jack";
+p.age = 10;
+```
 
 1. 先加载Person类信息(属性和方法信息，只会加载一次)
 2. 在堆中分配空间，进行默认初始化
