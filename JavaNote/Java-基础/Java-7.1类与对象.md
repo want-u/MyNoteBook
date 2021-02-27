@@ -396,3 +396,210 @@ public 返回数据类型 方法名(形参列表) { // 方法体
 3. 方法主体：表示为了实现某一功能的代码块
 4. return 语句不是必须的
 
+## 方法细节
+
+### 访问修饰符
+
+作用是控制 方法使用的范围
+
+共有四种：[public，protected，默认，private]
+
+如果不写即默认访问
+
+### 返回数据类型
+
+1. 一个方法最多有一个返回值 [思考：如何返回多个结果 返回数组即可]
+2. 返回类型可以为任意类型，包含基本类型和引用类型 (数组，对象)
+3. 如果方法要求有**返回数据类型**，则方法体中最后的执行语句必须为 **return 值;** 而且要求返回值类型必须和return 的值类型一致或兼容
+4. 如果方法是void，则方法体中可以没有return语句，或 只写 return;
+
+```
+public class MethodDetail {
+	public static void main(String[] args) {
+		// 在实际工作中，方法都应有具体含义
+		AA a = new AA();
+		int[] res = a.getSumAndSub(1, 4);
+		System.out.println("sum=" + res[0] + " sub=" + res[1]);
+	}
+}
+
+
+class AA {
+	// 一个方法最多有一个返回值 
+	// [思考：如何返回多个结果 返回数组即可]
+	public int[] getSumAndSub(int n1, int n2) {
+		int[] resArr = {n1 + n2, n1 - n2};
+		return resArr;
+	}
+
+	// 返回类型可以为任意类型，包含基本类型和引用类型 (数组，对象)
+	// 如上方法，返回数组
+
+	// 如果方法要求有**返回数据类型**，则方法体中最后的执行语句必须为 **return 值;** 
+	// 而且要求返回值类型必须和return 的值类型一致或兼容
+	public double f2() {
+		double d1 = 1.1 * 3;
+		int n = 100;
+		// return d1; // ok
+		return n; // ok int -> double
+	}
+	// 如果方法是void，则方法体中可以没有return语句
+	// 或 只写 return;
+	public void f3() {
+		System.out.println("hello world");
+		return; // 也可以不写
+	}
+}
+```
+
+### 方法名
+
+遵循驼峰命名法，最好见名知义，表达出该功能的意思即可
+
+比如：得到两个数的和 getSum ，开发中按照规范
+
+
+
+### 形参列表
+
+1. 一个方法可以有0个参数，也可以有多个参数，中间用逗号隔开
+
+   比如：getSum(int n1, int n2);
+
+2. 参数类型可以为任意类型，包含基本类型和引用类型
+
+   比如：printArr(int\[][] map)
+
+3. 调用带参数的方法时，一定对应着参数列表传入相同类型或兼容类型的参数
+
+4. 方法定义时的参数称为形式参数，简称形参；方法调用时传入的参数称为实际参数，简称实参
+
+   实参和形参的类型要一致或兼容，个数、顺序必须一致
+
+### 方法体
+
+里面写完成功能的具体的语句
+
+可以为输入、输出、变量、运算、分支、循环、方法调用
+
+但里面不能再定义方法！即：方法不能嵌套定义！
+
+### 方法调用细节
+
+1. 同一个类中的方法调用：直接调用即可。比如：print(参数)
+
+2. 跨类中的方法A类调用B类方法：需要通过对象名调用。
+
+   比如：对象名.方法名(参数)
+
+3. 特别说明：跨类的方法调用和方法的访问修饰符相关，后面再细说
+
+```
+public class MethodDetail02 {
+	public static void main(String[] args) {
+		A a = new A();
+		a.sayOk();
+		a.m1();
+	}
+}
+
+
+class A {
+	// 同一个类中的方法调用：直接调用即可。比如：print(参数)
+	public void print(int n) {
+		System.out.println("print方法被调用 n=" + n);
+	}
+
+	public void sayOk() {
+		print(10);
+		System.out.println("sayOk 继续...");
+	}
+
+	// 跨类中的方法A类调用B类方法：需要通过对象名调用。
+	public void m1() {
+		// 创建B对象，然后调用方法
+		System.out.println("m1被调用");
+		B b = new B();
+		b.hi();
+		System.out.println("m1继续...");
+	}
+}
+
+class B {
+	public void hi() {
+		System.out.println("hi方法被调用");
+	}
+}
+```
+
+### 课堂练习
+
+1. 编写类AA，有一个方法：判断一个数是奇数还是偶数，返回boolean
+
+2. 根据行、列、字符打印 对应行数和列数的字符
+   比如：行4，列4，字符#，则打印为：
+
+   ####
+   ####
+   ####
+   ####
+
+```
+public class MethodExercise01 {
+	public static void main(String[] args) {
+		AA a = new AA();
+		// 1.
+		if (a.isOdd(1)) {
+			System.out.println("是奇数");
+		} else {
+			System.out.println("是偶数");
+		}
+		// 2.
+		a.print(4, 4, '#');
+
+	}
+}
+
+// 编写类AA，有一个方法：判断一个数是奇数还是偶数，返回boolean
+class AA {
+	// 1. 方法的返回类型 boolean
+	// 2. 方法的名字 isOdd
+	// 3. 方法的形参 (int n)
+	// 4. 方法体 判断
+	public boolean isOdd(int n) {
+		// if (n % 2 != 0) {
+		// 	return true;
+		// } else {
+		// 	return false;
+		// }
+
+		// return n % 2 != 0 ? true; false;
+		return n % 2 != 0;
+	}
+	
+	/*
+	根据行、列、字符打印 对应行数和列数的字符
+	比如：行4，列4，字符#，则打印为：
+
+	####
+	####
+	####
+	####
+
+	1. 方法返回类型void
+	2. 方法名 print
+	3. 方法参数(int row, int col, char c)
+	4. 方法体 循环
+	*/
+	public void print(int row, int col, char c) {
+		for (int i = 1; i <= row; i++) {
+			for (int j = 1; j <= col; j++) {
+				System.out.print(c);
+			}
+			System.out.println();
+		}
+	}
+
+}
+```
+
