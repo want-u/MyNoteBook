@@ -603,3 +603,164 @@ class AA {
 }
 ```
 
+## 方法传参机制
+
+方法的传参机制对我们今后的编程**非常重要**，一定要搞的清清楚楚明明白白：
+
+### 基本数据类型
+
+**基本数据类型的传参机制**
+
+基本数据类型，传递的是值(值拷贝)，形参的任何改变不影响实参！
+
+案例分析：
+
+```
+public class MethodParameter01 {
+	public static void main(String[] args) {
+		int a = 10, b = 20;
+		// 创建AA对象
+		AA obj = new AA();
+		obj.swap(a, b);
+		System.out.println("main a=" + a + " b=" + b); // a=10,b=20
+	}
+}
+
+class AA {
+	public void swap(int a, int b) {
+		System.out.println("交换前 a=" + a + " b=" + b); // a=10,b=20
+		int tmp = a;
+		a = b;
+		b= tmp;
+		System.out.println("交换后 a=" + a + " b=" + b); // a=20,b=10
+	}
+}
+```
+
+![image-20210228134651080](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228134651080.png)
+
+### 引用数据类型
+
+**引用数据类型的传参机制**
+
+案例：
+
+B类中写一个方法test100，可以接收一个数组，在方法中修改该数组，看看原来的数组是否变化？// 会变化
+
+B类中写一个方法test200，可以接收一个Person(age,sal)对象，在方法中修改该对象属性，看看原来的对象是否变化？ // 会变化
+
+```
+public class MethodParameter02 {
+	public static void main(String[] args) {
+		// 1. 数组测试
+		int[] arr = {1, 2, 3};
+		// 创建B对象
+		B b = new B();
+		b.test100(arr);
+		System.out.println("main arr数组 ");
+		for (int i =0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		System.out.println("==========");
+		// 2. 对象测试
+		Person p = new Person();
+		p.name = "jack";
+		p.age = 10;
+		b.test200(p);
+		System.out.println("age=" + p.age); // 10000
+		// 当test200方法中 p=null，此时输出age=10
+		// 当test200方法中 p = new Person();，此时输出age=10
+
+	}
+}
+
+class Person {
+	String name;
+	int age;
+}
+
+class B {
+	// B类中写一个方法test200，可以接收一个Person(age,sal)对象
+	// 在方法中修改该对象属性，看看原来的对象是否变化？ // 会变化
+	public void test200(Person p) {
+		// p.age = 10000;
+		// 思考1：p=null
+		// p=null;
+		// 思考2：p = new Person();
+		p = new Person();
+		p.name = "tom";
+		p.age = 999;
+
+	}
+
+
+	// B类中写一个方法test100，可以接收一个数组
+	// 在方法中修改该数组，看看原来的数组是否变化？// 会变化
+	public void test100(int[] arr) {
+		arr[0] = 100; // 修改元素
+		// 遍历数组
+		System.out.println("test100 arr数组 ");
+		for (int i =0; i < arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		System.out.println();
+	}
+}
+```
+
+![image-20210228141007833](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228141007833.png)
+
+![image-20210228142054377](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228142054377.png)
+
+![image-20210228142713348](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228142713348.png)
+
+![image-20210228143553504](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228143553504.png)
+
+## 对象的拷贝
+
+编写一个方法copyPerson，可以赋值一个Person对象，返回复制的对象。
+克隆对象：要求得到的新对象和原来的对象是两个独立的对象，只是属性相同
+
+```
+public class MethodExercise02 {
+	public static void main(String[] args) {
+		// 对象的拷贝
+		Person p = new Person();
+		p.name = "milan";
+		p.age = 100;
+		// 创建一个tools对象
+		MyTools tools = new MyTools();
+		Person p2 = tools.copyPerson(p);
+		System.out.println("p name=" + p.name + " age=" + p.age);
+		System.out.println("p2 name=" + p2.name + " age=" + p2.age);
+		// 比较两个对象，判断是否是同一个对象
+		System.out.println(p == p2); // false
+	}
+}
+
+/*
+	编写一个方法copyPerson，可以赋值一个Person对象，返回复制的对象。
+	克隆对象：要求得到的新对象和原来的对象是两个独立的对象，只是属性相同
+	思路:
+	1. 方法返回类型 Person
+	2. 方法名 copyPerson
+	3. 方法参数(Person p)
+	4. 方法体 创建一个新对象，并赋值属性
+*/
+class Person {
+	String name;
+	int age;
+}
+
+
+class MyTools {
+	public Person copyPerson(Person p) {
+		Person p2 = new Person();
+		p2.name = p.name; // 把原来对象的名字赋给p2
+		p2.age = p.age; // 把原来对象的年龄赋给p2
+		return p2;
+	}
+}
+```
+
+![image-20210228160055890](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228160055890.png)
