@@ -539,10 +539,12 @@ class B {
 2. 根据行、列、字符打印 对应行数和列数的字符
    比如：行4，列4，字符#，则打印为：
 
+   ```
    ####
    ####
    ####
    ####
+   ```
 
 ```
 public class MethodExercise01 {
@@ -649,6 +651,9 @@ B类中写一个方法test100，可以接收一个数组，在方法中修改该
 
 B类中写一个方法test200，可以接收一个Person(age,sal)对象，在方法中修改该对象属性，看看原来的对象是否变化？ // 会变化
 
+思考1：p=null
+思考2：p = new Person();
+
 ```
 public class MethodParameter02 {
 	public static void main(String[] args) {
@@ -708,11 +713,19 @@ class B {
 }
 ```
 
+数组示意图
+
 ![image-20210228141007833](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228141007833.png)
+
+对象示意图
 
 ![image-20210228142054377](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228142054377.png)
 
+p=null示意图
+
 ![image-20210228142713348](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228142713348.png)
+
+p=new Person();示意图
 
 ![image-20210228143553504](https://gitee.com/luoxian1011/pictures/raw/master/image-20210228143553504.png)
 
