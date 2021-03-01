@@ -258,3 +258,43 @@ class T {
 }
 ```
 
+### 汉诺塔
+
+ 汉诺塔传说 
+
+汉诺塔：汉诺塔（又称河内塔）问题是源于印度一个古老传说的益智玩具。大梵天创造世界的时候做了三根金刚石柱子， 在一根柱子上从下往上按照大小顺序摞着 64 片圆盘。大梵天命令婆罗门把圆盘从下面开始按大小顺序重新摆放在另一 根柱子上。并且规定，在小圆盘上不能放大圆盘，在三根柱子之间一次只能移动一个圆盘。 
+
+假如每秒钟移动一次，共需多长时间呢？移完这些金片需要 5845.54 亿年以上，太阳系的预期寿命据说也就是数百亿年。 真的过了 5845.54 亿年，地球上的一切生命，连同梵塔、庙宇等，都早已经灰飞烟灭
+
+![image-20210302000001945](https://gitee.com/luoxian1011/pictures/raw/master/image-20210302000001945.png)
+
+```
+public class HanoiTower {
+	public static void main(String[] args) {
+		// 汉诺塔
+		Tower tower = new Tower();
+		tower.move(5, 'A', 'B', 'C');
+	}	
+}
+	
+class Tower {
+	//方法
+	// num 表示要移动的个数
+	// a，b，c 表示 A塔，B塔，C塔
+	public void move(int num, char a, char b, char c) {
+		// 如果只有一个盘 num = 1
+		if (num == 1) {
+			System.out.println(a + "->" + c);
+		} else {
+			// 如果右多个盘，就可以看成两个，最下面的 和 上面所有
+			// 1. 先移动上面所有的盘到 b，需要借助 c
+			move(num - 1, a, c, b);
+			// 2. 把最下面的盘，移动到 c
+			System.out.println(a + "->" + c);
+			// 3. 再把b 塔的所有盘，移动到c，需要借助 a
+			move(num - 1, b, a, c);
+		}
+	}
+}
+```
+
