@@ -157,7 +157,9 @@ class T {
 
 ```
 public class MiGong {
-    // 个人理解：方法的复用，每一步都使用同样的方法测试结果
+    // 个人理解：
+    // 方法的复用，每一步都使用同样的方法测试上下左右
+    // 不断调用方法测试路线，直到走到出口停止
 	public static void main(String[] args) {
 		/*
 		 迷宫问题
