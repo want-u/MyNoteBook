@@ -157,7 +157,7 @@ class T {
 
 ```
 public class MiGong {
-    // 个人理解：方法的复用
+    // 个人理解：方法的复用，每一步都使用同样的方法测试结果
 	public static void main(String[] args) {
 		/*
 		 迷宫问题
