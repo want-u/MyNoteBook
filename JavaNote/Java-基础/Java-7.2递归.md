@@ -157,6 +157,7 @@ class T {
 
 ```
 public class MiGong {
+    // 个人理解：方法的复用
 	public static void main(String[] args) {
 		/*
 		 迷宫问题
