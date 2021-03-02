@@ -379,3 +379,148 @@ public class QueenTest {
 }
 ```
 
+## Java-重载
+
+### 基本介绍
+
+Java中允许同一个类中，多个同名方法的存在，但要求形参列表不一致
+
+比如：System.out.println(); out是PrintStream类型
+
+重载的好处：
+
+1. 减轻了起名的麻烦
+2. 减轻了记名的麻烦
+
+```
+System.out.println(100);
+System.out.println("hello world");
+System.out.println('A');
+System.out.println(1.1);
+System.out.println(true);
+```
+
+### 快速入门
+
+案例：类：MyCalculator 方法：calculator
+
+calculator(int n1, int n2)
+
+calculator(int n1, double n2)
+
+calculator(double n1, int n2)
+
+calculator(int n1, int n2, int n3)
+
+```
+public class OverLoad01 {
+	public static void main(String[] args) {
+		MyCalculator mc = new MyCalculator();
+		System.out.println(mc.calculator(1, 9));
+		System.out.println(mc.calculator(1, 9.1));
+		System.out.println(mc.calculator(1.2, 9));
+		System.out.println(mc.calculator(1, 9, 1));
+	}
+}
+
+class MyCalculator {
+	public int calculator(int n1, int n2) {
+		return n1 + n2;
+	}
+	public double calculator(int n1, double n2) {
+		return n1 + n2;
+	}
+	public double calculator(double n1, int n2) {
+		return n1 + n2;
+	}
+	public int calculator(int n1, int n2, int n3) {
+		return n1 + n2 + n3;
+	}
+}
+```
+
+### 使用细节
+
+1. 方法名：必须相同
+2. 形参列表：必须不同（形参的类型或个数或顺序，至少有一样不同，参数名无要求）
+3. 返回类型：无要求
+
+```
+	public int calculator(int n1, int n2) {
+		return n1 + n2;
+	}
+	// 构成重载
+	public double calculator(int n1, double n2) {
+		return n1 + n2;
+	}
+	// 形参名不同，不构成重载，会报错[方法重复]
+	public double calculator(int a1, int a2) {
+		return a1 + a2;
+	}
+	// 返回类型不同，不构成重载，会报错[方法重复]
+	public void calculator(double n1, int n2) {
+		int res = n1 + n2;
+	}
+```
+
+### 课堂练习
+
+0. 判断题：
+
+```
+与void show(int a, char b, double c) {} 构成重载的有：[_bcde_]
+a)void show(int x, char y, double z) {}
+b)int show(int a, double b, char c) {}
+c)void show(int a, double b, char c) {}
+d)boolean show(int a, char b) {}
+e)void show(double c) {}
+f)double show(int x, char y, double z) {}
+g)void shows() {}
+```
+
+1. 编写程序：类Methods中定义三个重载方法并调用。方法名为m。三个方法分别接收一个int参数、两个int参数、一个字符串参数。分别执行平方运算并输出结果，相乘并输出结果，输出字符串信息。在主类的main()方法中分别用参数区别调用三个方法
+
+2. 在Methods类，定义三个重载方法max()，第一个方法，返回两个int值中的最大值，第二个方法，返回两个double值中的最大值，第三个方法，返回三个double值中的最大值，分别调用三个方法
+
+```
+public class OverLoadExercise {
+	public static void main(String[] args) {
+		// 调用重载方法
+		Methods methods = new Methods();
+		methods.m(9);
+		methods.m(9, 2);
+		methods.m("hello world");
+		methods.m("====");
+		System.out.println(methods.max(1,4));
+		System.out.println(methods.max(1.1,4.4));
+		System.out.println(methods.max(1.1,4.4,6));
+	}
+}
+
+class Methods {
+	// 1
+	public void m(int n) {
+		System.out.println(n * n);
+	}
+	public void m(int n1, int n2) {
+		System.out.println(n1 * n2);
+	}
+	public void m(String s) {
+		System.out.println(s);
+	}
+
+	// 2
+	public int max(int n1, int n2) {
+		return n1 > n2 ? n1 : n2;
+	}
+	public double max(double n1, double n2) {
+		return n1 > n2 ? n1 : n2;
+	}
+	public double max(double n1, double n2, double n3) {
+		// 先求出n1和n2的最大值
+		double max1 = n1 > n2 ? n1 : n2;
+		return max1 > n3 ? max1 : n3;
+	}
+}
+```
+
