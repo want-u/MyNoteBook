@@ -348,3 +348,449 @@ class Person {
 }
 ```
 
+## 本章作业
+
+1. 编写类A01，定义方法max，实现求某个double数组的最大值，并返回
+
+   **返回值为Double（包装类）时，可以返回double或null**
+
+```
+public class Homework01 {
+	public static void main(String[] args) {
+		double[] arr = {1.1, 2.2};
+		// double[] arr = null;
+		// double[] arr = {};
+		A01 a = new A01();
+		Double res = a.max(arr);
+		if (res != null) {
+			System.out.println("arr的最大值=" + a.max(arr));
+		} else {
+			System.out.println("arr的输入有误");
+		}
+	}
+}
+
+
+// 编写类A01，定义方法max，实现求某个double数组的最大值，并返回
+class A01 {
+	public Double max(double[] arr) {
+		// 先判断arr是否为null，再判断数组长度
+		if (arr != null && arr.length > 0) {
+			
+			// 保证arr至少有一个元素
+			double max = arr[0];
+			for (int i = 1; i < arr.length; i++) {
+				if (max < arr[i]) {
+					max = arr[i];
+				}
+			}
+			return max; // double
+		}
+		return null; // 使Double对象置空
+	}
+}
+```
+
+2. 编写类A02，定义方法find，实现查找某字符串是否在数组中，并返回索引，如果找不到，返回-1
+
+```
+public class Homework02 {
+	public static void main(String[] args) {
+		String[] strs = {"tom", "jack"};
+		
+		A02 a = new A02();
+		System.out.println("查找的index=" + a.find("tom", strs));
+		System.out.println("查找的index=" + a.find("tomm", strs));
+	}
+}
+
+// 编写类A02，定义方法find
+// 实现查找某字符串数组中的元素查找，并返回索引
+// 如果找不到，返回-1
+class A02 {
+	public int find(String findStr, String[] strs) {
+		for (int i = 0; i < strs.length; i++) {
+			if (findStr.equals(strs[i])) {
+				return i;
+			}
+		}
+		// 如果没有，就返回-1
+		return -1;
+	}
+}
+```
+
+3. 编写类Book，定义方法updatePrice，实现更改某本书的价格
+
+   具体：如果价格>150，则更改为150，如果价格>100，则更改为100，否则不变
+
+```
+public class Homework03 {
+	public static void main(String[] args) {
+		Book book1 = new Book("红楼", 199.9);
+		book1.info();
+		book1.updatePrice();
+		book1.info();
+	}
+}
+
+/*
+编写类Book，定义方法updatePrice，实现更改某本书的价格
+具体：如果价格>150，则更改为150，如果价格>100，则更改为100，否则不变
+分析
+1. 类名：Book
+2. 属性：name，price
+3. 方法名：updatePrice
+4. 形参：()
+5. 返回值：void
+6. 提供一个构造器
+*/
+class Book {
+	String name;
+	double price;
+	public Book(String name, double price) {
+		this.name = name;
+		this.price = price;
+	}
+
+	public void updatePrice() {
+		if (this.price > 150) {
+			this.price = 150;
+		} else if (this.price > 100) {
+			this.price = 100;
+		}
+	}
+
+	// 输出book信息
+	public void info() {
+		System.out.println(this.name + ":" + this.price);
+	}
+}
+```
+
+4. 编写类A03，实现数组的复制copyArr，输入旧数组，返回一个新数组，元素和旧数组一样
+
+```
+public class Homework04 {
+	public static void main(String[] args) {
+		int[] oldArr = {1, 2, 4};
+
+		A03 a = new A03();
+		int[] newArr = a.copyArr(oldArr);
+
+		// 输出数组
+		System.out.println("====复制的新数组情况====");
+		for (int i = 0 ; i < newArr.length; i++) {
+			System.out.print(newArr[i] + " ");
+		}
+	}
+}
+
+// 编写类A03，实现数组的复制copyArr
+// 输入旧数组，返回一个新数组，元素和旧数组一样
+class A03 {
+	public int[] copyArr(int[] oldArr) {
+		int[] newArr = new int[oldArr.length];
+		for (int i = 0; i < oldArr.length; i++) {
+			newArr[i] = oldArr[i];
+		}
+		return newArr;
+	}
+}
+```
+
+5. 定义一个圆类Circle，定义属性：半径，提供显示圆周长功能的方法，提供显示圆面积的方法
+
+```
+public class Homework05 {
+	public static void main(String[] args) {
+		Circle c1 = new Circle(3);
+		System.out.println("周长=" + c1.len());
+		System.out.println("面积=" + c1.area());
+	}
+}
+
+// 定义一个圆类Circle，定义属性：半径
+// 提供显示圆周长功能的方法，提供显示圆面积的方法
+class Circle {
+	double radius; // 半径
+
+	public Circle(double radius) {
+		this.radius = radius;
+	}
+
+	public double len() { // 周长
+		return 2 * Math.PI * radius;
+	}
+
+	public double area() { // 面积
+		return Math.PI * radius * radius;
+	}
+}
+```
+
+6. 编程创建一个Cale计算类，在其中定义2个变量表示两个操作数，定义四个方法实现求和、差、乘、商(要求除数为0要提示)并创建两个对象，分别测试
+
+```
+public class Homework06 {
+	public static void main(String[] args) {
+		// Cale c1 = new Cale(2, 10);
+		Cale c1 = new Cale(2, 0);
+		System.out.println("和=" + c1.sum());
+		System.out.println("差=" + c1.minus());
+		System.out.println("乘=" + c1.mul());
+		Double res = c1.div();
+		if (res != null) {
+			System.out.println("除=" + c1.div());
+		} else {
+			System.out.println("除数不能为0");
+		}
+	}
+}
+
+/*
+编程创建一个Cale计算类，在其中定义2个变量表示两个操作数
+定义四个方法实现求和、差、乘、商
+(要求除数为0要提示)并创建两个对象，分别测试
+*/
+class Cale {
+	double n1;
+	double n2;
+
+	public Cale(double n1, double n2) {
+		this.n1 = n1;
+		this.n2 = n2;
+	}
+
+	public double sum() { // 和
+		return n1 + n2;
+	}
+
+	public double minus() { // 差
+		return n1 - n2;
+	}
+
+	public double mul() { // 乘
+		return n1 * n2;
+	}
+
+	public Double div() { // 除
+		if (n2 == 0) {
+			return null;
+		} 
+		return n1 / n2;
+	}
+}
+```
+
+7. 设计一个Dog类，有名字、颜色和年龄属性，定义输出方法show()显示其他信息。并创建对象测试
+
+```
+public class Homework07 {
+	public static void main(String[] args) {
+		Dog dog = new Dog("小白", "黑色", 3);
+		dog.show();
+	}
+}
+
+// 设计一个Dog类，有名字、颜色和年龄属性
+// 定义输出方法show()显示其信息。并创建对象测试
+class Dog {
+	String name;
+	String color;
+	int age;
+
+	public Dog(String name, String color, int age) {
+		this.name = name;
+		this.color = color;
+		this.age = age;
+	}
+
+	public void show() {
+		System.out.println(name + "信息如下：");
+		System.out.println("color=" + color + " age=" + age);
+	}
+}
+```
+
+8. 分析代码输出
+
+输出结果：10 9 10
+
+![image-20210305220136005](https://gitee.com/luoxian1011/pictures/raw/master/image-20210305220136005.png)
+
+```
+public class Test {
+	int count = 9;
+	public void count1() {
+		count = 10;
+		System.out.println("count1=" + count);
+	}
+	public void count2() {
+		// 先输出，再自增
+		System.out.println("count1=" + count++);
+	}
+	public static void main(String[] args) {
+		// 匿名对象，只能使用一次
+		new Test().count1(); // count1=10
+
+
+		Test t1 = new Test();
+		t1.count2(); // count1=9
+		t1.count2(); // count1=10
+	}
+}
+```
+
+9. 定义Music类，里面有音乐名name，音乐时长times属性，并由播放play功能和返回本身属性信息的功能方法getinfo
+
+```
+public class Homework09 {
+	public static void main(String[] args) {
+		Music m = new Music("告白气球", 340);
+		m.play();
+		System.out.println(m.getInfo());
+
+	}
+}
+
+
+// 9. 定义Music类
+// 里面有音乐名name，音乐时长times属性
+// 并由播放play功能和返回本身属性信息的功能方法getinfo
+class Music {
+	String name;
+	int times;
+
+	public Music(String name, int times) {
+		this.name = name;
+		this.times = times;
+	}
+
+	public void play() {
+		System.out.println(name + "正在播放...");
+	}
+
+	public String getInfo() {
+		return "音乐：" + name + " 时长：" + times + "s";
+	}
+}
+```
+
+10. 分析代码输出
+
+输出结果：101 100 101 101
+
+![image-20210305222251765](https://gitee.com/luoxian1011/pictures/raw/master/image-20210305222251765.png)
+
+11. 在测试方法中，调用method方法，代码如下，编译正确，试写出method方法的定义形式。调用语句为：System.out.println(method(method(10.0, 20.0), 100));
+
+输出：method(method(10.0, 20.0), 100)
+
+method(10.0, 20.0)
+
+```
+public double method(double d1, double d2) {
+
+}
+```
+
+12. 创建一个Employee类，属性有(名字，性别，年龄，职位，薪水)，提供3个构造器，可以初始化
+
+    1. (名字，性别，年龄，职位，薪水)
+    2. (名字，性别，年龄)
+    3. (职位，薪水)
+
+    要求充分复用构造器
+
+```
+public class Homework12 {
+	public static void main(String[] args) {
+		Employee e = new Employee("bai", '男', 18, "it", 9999.9);
+	}
+}
+
+/*
+创建一个Employee类，属性有(名字，性别，年龄，职位，薪水)，提供3个构造器，可以初始化
+
+1. (名字，性别，年龄，职位，薪水)
+2. (名字，性别，年龄)
+3. (职位，薪水)
+
+要求充分复用构造器
+*/
+class Employee {
+	String name;
+	char gender;
+	int age;
+	String job;
+	double salary;
+
+	// 职位，薪水
+	public Employee(String job, double salary) {
+		this.job = job;
+		this.salary = salary;
+	}
+
+	// 名字，性别，年龄
+	public Employee(String name, char gender, int age) {
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+	}
+
+	// 名字，性别，年龄，职位，薪水
+	public Employee(String name, char gender, int age, String job, double salary) {
+		this(name, gender, age); // 复用构造器
+		this.job = job;
+		this.salary = salary;
+	}
+}
+```
+
+13. 将对象最为参数传递给方法
+
+![image-20210305225332487](https://gitee.com/luoxian1011/pictures/raw/master/image-20210305225332487.png)
+
+```
+public class Homework13 {
+	public static void main(String[] args) {
+		Circle c = new Circle();
+		PassObject p = new PassObject();
+		p.printArea(c, 5);
+	}
+}
+
+class Circle {
+	double radius; // 半径
+
+	public double findArea(double radius) {
+		return Math.PI * radius * radius;
+	}
+
+	// 添加方法setRadius，修改对象的半径值
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+}
+
+class PassObject {
+	public void printArea(Circle c, int times) {
+		System.out.println("Radius\tArea");
+		for (int i = 1; i <= times; i++) {
+			// 修改c对象的半径值
+			c.setRadius(i);
+			System.out.println((double)i + "\t" + c.findArea(i));
+		}
+	}
+}
+```
+
+14. 有个人 Tom 设计他的成员变量，成员方法，可以电脑猜拳
+
+    电脑每次都会随机生成0，1，2
+
+    0 表示石头 1 表示剪刀 2 表示 布
+
+    并要可以显示 Tom 的输赢次数(清单)
+
