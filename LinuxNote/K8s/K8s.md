@@ -6,6 +6,8 @@
 
 在所有的节点安装
 
+![image-20210306170353135](https://gitee.com/luoxian1011/pictures/raw/master/image-20210306170353135.png)
+
 ### 环境要求
 
 https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
@@ -112,6 +114,7 @@ vim /etc/docker/daemon.json
 # 之后重新启动服务：
 sudo systemctl daemon-reload
 sudo systemctl restart docker
+sudo systemctl enable docker
 ```
 
 ### 安装k8s工具
