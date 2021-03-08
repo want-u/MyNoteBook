@@ -6,8 +6,6 @@
 
 在所有的节点安装
 
-![image-20210306170353135](https://gitee.com/luoxian1011/pictures/raw/master/image-20210306170353135.png)
-
 ### 环境要求
 
 https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
@@ -22,6 +20,8 @@ https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/install
 ### 环境拓扑
 
 [内存>2G 核心数>2]
+
+![image-20210306170353135](https://gitee.com/luoxian1011/pictures/raw/master/image-20210306170353135.png)
 
 |    主机    |      IP       |  角色  |
 | :--------: | :-----------: | :----: |
@@ -74,8 +74,8 @@ sysctl -p
 ```
 # 允许 iptables 检查桥接流量，确保 br_netfilter 模块被加载
 # 加载模块
-lsmod | grep netfilter
 modprobe br_netfilter
+lsmod | grep netfilter
 # 添加内核参数 vim /etc/sysctl.conf
 net.bridge.bridge-nf-call-arptables = 1
 net.bridge.bridge-nf-call-ip6tables = 1
@@ -135,10 +135,106 @@ EOF
 ```
 # 安装Kubernetes (k8s)
 yum install -y kubelet-1.18.16 kubeadm-1.18.16 kubectl-1.18.16
-systemctl enable kubelet && systemctl start kubelet
+systemctl enable kubelet && systemctl restart kubelet
 ```
 
 ```
+#### 尝试初始化 ####
+# 参数 --image-repository registry.aliyuncs.com/google_containers
+kubeadm init --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.15.1 --apiserver-advertise-address 172.20.10.2 --pod-network-cidr=10.244.0.0/16
+[init] Using Kubernetes version: v1.15.1
+
+You can now join any number of machines by running the following on each node
+as root:
+
+  kubeadm join 172.20.10.2:6443 --token rn816q.zj0crlasganmrzsr --discovery-token-ca-cert-hash sha256:e339e4dbf6bd1323c13e794760fff3cbeb7a3f6f42b71d4cb3cffdde72179903
+```
+
+## 初始化
+
+### 执行初始化
+
+```
+# master节点执行：[需要花一点时间，拉取镜像啥的]
+
+kubeadm init  --image-repository registry.aliyuncs.com/google_containers --apiserver-advertise-address 192.168.10.11  --pod-network-cidr 10.244.0.0/16
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+### 安装pod网络
+
+要让 Kubernetes Cluster 能够工作，必须安装 Pod 网络，否则 Pod 之间无法通信。
+
+Kubernetes 支持多种网络方案，这里我们先使用 flannel
+
+```
+# 配置yml文件
+# 访问复制，新建kube-flannel.yml文件
+https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+# 安装 Pod 网络
+kubectl apply -f kube-flannel.yml
+
+```
+
+### 节点加入
+
+```
+# node节点执行：
+
+kubeadm join 192.168.10.11:6443 --token oyg7d9.bgimipoquhfb2s3h \
+    --discovery-token-ca-cert-hash sha256:b4b6fc537914aa870e33f8e9234ae7d95f46840f857e51e7088b3de4586192a6
+    
+```
+
+```
+在master节点执行：
+
+# 查看节点状态
+[root@k8s-master src]# kubectl get node
+NAME         STATUS   ROLES    AGE     VERSION
+k8s-master   Ready    master   10m     v1.18.16
+k8s-node1    Ready    <none>   7m58s   v1.18.16
+k8s-node2    Ready    <none>   7m27s   v1.18.16
+
+# 查看pod信息
+[root@k8s-master src]# kubectl get pods -n kube-system
+NAME                                 READY   STATUS    RESTARTS   AGE
+coredns-66bff467f8-5jhng             1/1     Running   0          10m
+coredns-66bff467f8-6rszg             1/1     Running   0          10m
+etcd-k8s-master                      1/1     Running   0          10m
+kube-apiserver-k8s-master            1/1     Running   0          10m
+kube-controller-manager-k8s-master   1/1     Running   0          10m
+kube-flannel-ds-6s6tm                1/1     Running   0          7m5s
+kube-flannel-ds-n5v5w                1/1     Running   0          7m5s
+kube-flannel-ds-qrcbw                1/1     Running   0          7m5s
+kube-proxy-6pq6r                     1/1     Running   0          7m25s
+kube-proxy-kzss9                     1/1     Running   0          10m
+kube-proxy-zcrtp                     1/1     Running   0          7m56s
+kube-scheduler-k8s-master            1/1     Running   0          10m
+```
+
+```
+# k8s 命令补全
+yum install -y bash-completion
+source /usr/share/bash-completion/bash_completion
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+```
+
+
+
+
+
+---
+
+## 附注
+
+```
+# 附注1：当初始镜像下载失败时，可以尝试
+
 # 查看所需镜像列表
 [root@k8s-master ~]# kubeadm config images list 
 I0306 15:43:35.262568   19369 version.go:255] remote version is much newer: v1.20.4; falling back to: stable-1.18
@@ -179,27 +275,7 @@ scp k8s-18-images.tar k8s-node2:/usr/src/
 ```
 
 ```
-#### 尝试初始化 ####
-# 参数 --image-repository registry.aliyuncs.com/google_containers
-[root@ken ~]# kubeadm init --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.15.1 --apiserver-advertise-address 172.20.10.2 --pod-network-cidr=10.244.0.0/16
-[init] Using Kubernetes version: v1.15.1
-
-You can now join any number of machines by running the following on each node
-as root:
-
-  kubeadm join 172.20.10.2:6443 --token rn816q.zj0crlasganmrzsr --discovery-token-ca-cert-hash sha256:e339e4dbf6bd1323c13e794760fff3cbeb7a3f6f42b71d4cb3cffdde72179903
-```
-
-### 安装pod网络
-
-要让 Kubernetes Cluster 能够工作，必须安装 Pod 网络，否则 Pod 之间无法通信。
-
-Kubernetes 支持多种网络方案，这里我们先使用 flannel
-
-```
-# 配置yml文件
-# 访问复制，新建kube-flannel.yml文件
-https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+# 附注2：当flannel网络连接失败时
 
 # 拉取镜像
 docker pull quay.io/coreos/flannel:v0.13.1-rc2
@@ -210,54 +286,5 @@ scp flannel.tar k8s-node1:/usr/src/
 scp flannel.tar k8s-node2:/usr/src/
 [root@k8s-node1 ~]# docker load -i /usr/src/flannel.tar 
 [root@k8s-node2 ~]# docker load -i /usr/src/flannel.tar 
-```
-
-## 初始化
-
-```
-# master节点执行：
-
-kubeadm init  --apiserver-advertise-address 192.168.10.11  --pod-network-cidr 10.244.0.0/16
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-```
-
-```
-# node节点执行：
-
-kubeadm join 192.168.10.11:6443 --token oyg7d9.bgimipoquhfb2s3h \
-    --discovery-token-ca-cert-hash sha256:b4b6fc537914aa870e33f8e9234ae7d95f46840f857e51e7088b3de4586192a6
-    
-```
-
-```
-在master节点执行：
-
-# 安装 Pod 网络
-kubectl apply -f kube-flannel.yml
-
-# 查看节点状态
-[root@k8s-master src]# kubectl get node
-NAME         STATUS   ROLES    AGE     VERSION
-k8s-master   Ready    master   10m     v1.18.16
-k8s-node1    Ready    <none>   7m58s   v1.18.16
-k8s-node2    Ready    <none>   7m27s   v1.18.16
-
-# 查看pod信息
-[root@k8s-master src]# kubectl get pods -n kube-system
-NAME                                 READY   STATUS    RESTARTS   AGE
-coredns-66bff467f8-5jhng             1/1     Running   0          10m
-coredns-66bff467f8-6rszg             1/1     Running   0          10m
-etcd-k8s-master                      1/1     Running   0          10m
-kube-apiserver-k8s-master            1/1     Running   0          10m
-kube-controller-manager-k8s-master   1/1     Running   0          10m
-kube-flannel-ds-6s6tm                1/1     Running   0          7m5s
-kube-flannel-ds-n5v5w                1/1     Running   0          7m5s
-kube-flannel-ds-qrcbw                1/1     Running   0          7m5s
-kube-proxy-6pq6r                     1/1     Running   0          7m25s
-kube-proxy-kzss9                     1/1     Running   0          10m
-kube-proxy-zcrtp                     1/1     Running   0          7m56s
-kube-scheduler-k8s-master            1/1     Running   0          10m
 ```
 
