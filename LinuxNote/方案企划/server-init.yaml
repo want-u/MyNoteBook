@@ -1,0 +1,48 @@
+---
+- hosts: all
+  remote_user: root
+  # 不收集变量信息，加快速度
+  gather_facts: no
+
+  tasks:
+    - name: "1. 关闭Selinux"
+      shell: sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
+    - name: SELINUX=disabled
+      selinux: state=disabled
+
+    - name: "2. 关闭防火墙"
+      service: name=firewalld state=stopped enabled=no
+
+    - name: "3. 设置时区"
+      file: src=/usr/share/zoneinfo/Asia/Shanghai dest=/etc/localtime state=link owner=root group=root force=yes
+
+    - name: "4. 同步时间"
+      shell: (echo "* 1 * * * ntpdate time.windows.com >/dev/null 2>&1";crontab -l) |crontab
+
+    - name: "5. 历史命令显示操作时间"
+      shell: echo 'export HISTTIMEFORMAT="%F %T `whoami` "' >> /etc/bashrc
+
+    - name: "6. 设置SSH超时时间"
+      shell: echo "export TMOUT=600" >> /etc/profile
+
+    - name: "7. 配置阿里yum源"
+      copy: src=/etc/yum.repos.d/CentOS-Base.repo dest=/etc/yum.repos.d/
+    - name: "配置阿里拓展源"
+      copy: src=/etc/yum.repos.d/epel.repo dest=/etc/yum.repos.d/
+    - name: "建立yum缓存"
+      shell: yum makecache fast
+
+    - name: "8. 安装常用工具"
+      shell: echo install...
+    - name: "install vim"
+      yum: name=vim
+    - name: "install lrzsz"
+      yum: name=lrzsz
+    - name: "install mlocate"
+      yum: name=mlocate
+    - name: "install net-tools"
+      yum: name=net-tools
+    - name: "install wget"
+      yum: name=wget
+    - name: "install bash-completion"
+      yum: name=bash-completion
