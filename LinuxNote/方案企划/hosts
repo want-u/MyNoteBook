@@ -1,0 +1,34 @@
+192.168.1.110		ansible
+		
+192.168.1.99		lb-vip
+192.168.1.11		lb-nginx1
+192.168.1.12		lb-nginx2
+		
+192.168.1.21		web-nginx1
+192.168.1.22		web-nginx2
+		
+192.168.1.31		tomcat1
+192.168.1.32		tomcat2
+		
+192.168.1.41		redis-cluster1
+192.168.1.42		redis-cluster2
+192.168.1.43		redis-cluster3
+		
+192.168.1.150		mycat-vip
+192.168.1.51		mycat1
+192.168.1.52		mycat2
+		
+192.168.1.61		mha-mysql-manager
+192.168.1.62		mha-mysql-master
+192.168.1.63		mha-mysql-master-bak
+192.168.1.64		mha-mysql-slave
+		
+192.168.1.200		dfs-client-vip
+192.168.1.71		dfs-client1
+192.168.1.72		dfs-client2
+192.168.1.73		dfs-tracker1
+192.168.1.74		dfs-tracker2
+192.168.1.75		dfs-storage1
+192.168.1.76		dfs-storage2
+		
+192.168.1.81		db-back
