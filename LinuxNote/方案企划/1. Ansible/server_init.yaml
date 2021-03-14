@@ -1,3 +1,5 @@
+# vim server-init.yaml
+
 ---
 - hosts: all
   remote_user: root
@@ -22,17 +24,14 @@
     - name: "5. 历史命令显示操作时间"
       shell: echo 'export HISTTIMEFORMAT="%F %T `whoami` "' >> /etc/bashrc
 
-    - name: "6. 设置SSH超时时间"
-      shell: echo "export TMOUT=600" >> /etc/profile
-
-    - name: "7. 配置阿里yum源"
+    - name: "6. 配置阿里yum源"
       copy: src=/etc/yum.repos.d/CentOS-Base.repo dest=/etc/yum.repos.d/
     - name: "配置阿里拓展源"
       copy: src=/etc/yum.repos.d/epel.repo dest=/etc/yum.repos.d/
     - name: "建立yum缓存"
       shell: yum makecache fast
 
-    - name: "8. 安装常用工具"
+    - name: "7. 安装常用工具"
       shell: echo install...
     - name: "install vim"
       yum: name=vim
@@ -46,3 +45,6 @@
       yum: name=wget
     - name: "install bash-completion"
       yum: name=bash-completion
+      
+    # - name: "6. 设置SSH超时时间"
+    #   shell: echo "export TMOUT=600" >> /etc/profile      
