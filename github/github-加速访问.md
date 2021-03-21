@@ -32,3 +32,8 @@
 Windows+X 打开系统命令行（管理员身份）或powershell
 
 运行 ipconfig /flushdns 手动刷新系统DNS缓存。
+
+
+
+
+
