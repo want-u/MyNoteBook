@@ -205,12 +205,42 @@ Idea 中也自带 Maven 插件，而且我们也可以给自带的 Maven 插件�
 
 3) 确认配置后，点击 Finish 即可创建成功
 
-4) 编写测试代码
+4) 运行代码
 
-在/src/**test**/java 目录下创建包并创建 HelloTest.java 文件，等待maven依赖导入完成后，即可直接运行java程序
+等待maven依赖导入完成后，即可直接运行java程序
 
 ![image-20210815182243393](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815182243393.png)
 
 5) Maven工具栏
 
 ![image-20210815182309393](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815182309393.png)
+
+### 4.3 在 Idea 中导入 Maven 项目
+
+下载maven示例工程：[快速入门 - 对象存储 OSS - 阿里云 (aliyun.com)](https://help.aliyun.com/document_detail/32011.html?spm=a2c4g.11186623.6.928.243d5338KAG4iv)
+
+#### 4.3.1 单独导入项目
+
+1) 关闭现有项目
+
+![image-20210815183353391](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815183353391.png)
+
+2) 打开或导入
+
+![image-20210815183434512](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815183434512.png)
+
+![image-20210815183500565](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815183500565.png)
+
+![image-20210815183524538](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815183524538.png)
+
+#### 4.3.2 导入多项目
+
+1) 点击 Project Structure（项目结构）
+
+![image-20210815182710132](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815182710132.png)
+
+2) 点击 Modules→➕→Import Module
+
+![image-20210815182957211](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815182957211.png)
+
+![image-20210815183023695](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815183023695.png)
