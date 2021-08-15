@@ -99,3 +99,15 @@ file -> settings -> plug-in
 ### 模板/自定义模板
 
 file -> settings -> editor -> Live templates -> 
+
+查看有哪些模板快捷键/可以自己增加模板
+
+模板可以高效的完成开发
+
+```
+main # main方法
+sout # 输出
+fori # for循环
+```
+
+![image-20210815221408222](https://gitee.com/luoxian1011/pictures/raw/master/image-20210815221408222.png)
