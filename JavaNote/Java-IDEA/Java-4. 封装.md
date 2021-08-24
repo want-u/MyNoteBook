@@ -226,7 +226,7 @@ class Person {
 }
 ```
 
-## 课堂练习
+## 6. 课堂练习
 
 com.hspedu.encap: AccountTest.java 和 Account.java
 
