@@ -125,4 +125,202 @@ class Person {
 }
 ```
 
+## 5. 将构造器和setXxx结合
+
+```
+    //将构造器和setXxx结合
+    public Person(String name, int age, double salary) {
+        this.setName(name);
+        this.setAge(age);
+        this.setSalary(salary);
+    }
+```
+
+```
+package com.hspedu.encap;
+
+public class Encapsulation01 {
+    public static void main(String[] args) {
+        Person person = new Person();
+        person.setName("jack and tom");
+        person.setAge(999);
+        person.setSalary(99999);
+        System.out.println(person.info());
+
+        //直接使用构造器指定属性
+        Person smith = new Person("smith", 199, 8888);
+        System.out.println(smith.info());
+    }
+}
+
+/*
+不能随便看人的年龄、工资等隐私，并对设置的年龄进行合理的验证。年龄合理就设置，否则给默认
+
+- 年龄必须在1 ~ 120
+- 年龄、工资不能直接查看
+- name的长度在 2 ~ 6 字符之间
+ */
+class Person {
+    private String name;
+    private int age;
+    private double salary;
+
+    public Person() {
+    }
+
+//    public Person(String name, int age, double salary) {
+//        this.name = name;
+//        this.age = age;
+//        this.salary = salary;
+//    }
+
+    //将构造器和setXxx结合
+    public Person(String name, int age, double salary) {
+        this.setName(name);
+        this.setAge(age);
+        this.setSalary(salary);
+    }
+
+    //    public void setName(String name) {
+//        this.name = name;
+//    }
+//通过快捷键 Alt + Insert 调出
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name.length() >= 2 && name.length() <= 6) {//name的长度在 2 ~ 6 字符之间
+            this.name = name;
+        } else {
+            System.out.println("name的长度在 2 ~ 6 字符之间, 默认为None");
+            this.name = "None";
+        }
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        if (age >= 1 && age <= 120) {//年龄必须在1 ~ 120
+            this.age = age;
+        } else {//给出默认年龄 0
+            System.out.println("年龄必须在1 ~ 120, 给出默认年龄 0");
+            this.age = 0;
+        }
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    //返回属性信息
+    public String info() {
+        return "属性信息为 name=" + name + " age=" + age + " salary=" + salary;
+    }
+}
+```
+
+## 课堂练习
+
+com.hspedu.encap: AccountTest.java 和 Account.java
+
+创建程序，在其中定义两个类：AccountTest 和 Account 体会Java的封装性
+
+1. Account类要求具有属性：姓名（长度2/3/4位）、余额（必须>20）、密码（必须是六位），如果不满足，则给出提示信息，并给默认值
+2. 通过setXxx的方法给Account的属性赋值
+3. 在AccountTest中测试
+
+提示知识点：
+
+String name="";
+
+int len = name.length;
+
+```
+package com.hspedu.encap;
+
+public class Account {
+    //1. Account类要求具有属性：姓名（长度2/3/4位）、余额（必须>20）、密码（必须是六位），如果不满足，则给出提示信息，并给默认值
+    //2. 通过setXxx的方法给Account的属性赋值
+
+    //为了封装，将属性设为private
+    private String name;
+    private double salary;
+    private String password;
+
+    //提供两个构造器
+    public Account() {
+    }
+
+    public Account(String name, double salary, String password) {
+        this.setName(name);
+        this.setSalary(salary);
+        this.setPassword(password);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        //姓名（长度2/3/4位）
+        if (name.length() >=2 && name.length() <= 4) {
+            this.name = name;
+        } else {
+            System.out.println("姓名（长度2/3/4位）,赋予默认值 Nobody");
+            this.name = "Nobody";
+        }
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        //余额（必须>20）
+        if (salary > 20) {
+            this.salary = salary;
+        } else {
+            System.out.println("余额（必须>20）, 赋予默认值 0");
+        }
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        //密码（必须是六位）
+        if (password.length() == 6) {
+            this.password = password;
+        } else {
+            System.out.println("密码（必须是六位）,赋予默认值 000000");
+        }
+    }
+
+    //显示账号信息
+    public String getInfo() {
+        //可以增加权限校验获取密码
+        return "账号信息 name=" + name + " salary=" + salary + " password=" + password;
+    }
+}
+```
+
+```
+package com.hspedu.encap;
+
+public class AccountTest {
+    public static void main(String[] args) {
+        Account account = new Account("johnppppppppp", 9, "qwepasd");
+        System.out.println(account.getInfo());
+    }
+}
+
+```
 
