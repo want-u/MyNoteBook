@@ -126,13 +126,13 @@ logger.critical('this is a logger critical message')
 只要在输入到日志中的第二步和第三步插入一个handler输出到控制台：
 创建一个handler，用于输出到控制台
 
-ch = logging.StreamHandler()
-ch.setLevel(logging.WARNING)  # 输出到console的log等级的开关
+- ch = logging.StreamHandler()
+- ch.setLevel(logging.WARNING)  # 输出到console的log等级的开关
 
 第四步和第五步分别加入以下代码即可
 
-ch.setFormatter(formatter)
-logger.addHandler(ch)
+- ch.setFormatter(formatter)
+- logger.addHandler(ch)
 
 ```
 import logging  # 引入logging模块
@@ -167,17 +167,17 @@ logger.critical('this is a logger critical message')
 
 ## 6、format常用格式说明
 
-%(levelno)s: 打印日志级别的数值
-%(levelname)s: 打印日志级别名称
-%(pathname)s: 打印当前执行程序的路径，其实就是sys.argv[0]
-%(filename)s: 打印当前执行程序名
-%(funcName)s: 打印日志的当前函数
-%(lineno)d: 打印日志的当前行号
-%(asctime)s: 打印日志的时间
-%(thread)d: 打印线程ID
-%(threadName)s: 打印线程名称
-%(process)d: 打印进程ID
-%(message)s: 打印日志信息
+- %(levelno)s: 打印日志级别的数值
+- %(levelname)s: 打印日志级别名称
+- %(pathname)s: 打印当前执行程序的路径，其实就是sys.argv[0]
+- %(filename)s: 打印当前执行程序名
+- %(funcName)s: 打印日志的当前函数
+- %(lineno)d: 打印日志的当前行号
+- %(asctime)s: 打印日志的时间
+- %(thread)d: 打印线程ID
+- %(threadName)s: 打印线程名称
+- %(process)d: 打印进程ID
+- %(message)s: 打印日志信息
 
 ## 7、捕捉异常,用traceback记录
 
@@ -212,7 +212,11 @@ except Exception, e:
 
 回显(存储在文件中)：
 
-![image-20211031162428285](https://gitee.com/luoxian1011/pictures/raw/master/image-20211031162428285.png)
+![image-20211031163757686](https://gitee.com/luoxian1011/pictures/raw/master/image-20211031163757686.png)
+
+如果需要将日志不上报错误，仅记录，可以将exc_info=False，回显如下：
+
+![image-20211031163817310](https://gitee.com/luoxian1011/pictures/raw/master/image-20211031163817310.png)
 
 ## 8、多模块调用logging,日志输出顺序
 
@@ -255,9 +259,9 @@ error_output.write_error()  # 调用error_output文件中write_error方法
 
 回显：
 
+![image-20211031163928380](https://gitee.com/luoxian1011/pictures/raw/master/image-20211031163928380.png)
 
-
-![image-20211031162540820](https://gitee.com/luoxian1011/pictures/raw/master/image-20211031162540820.png)
+从上面来看，日志的输出顺序和模块执行顺序是一致的。
 
 ## 9、日志滚动和过期删除(按时间)
 
@@ -299,12 +303,13 @@ if __name__ == "__main__":
 filename：日志文件名的prefix；
 
 when：是一个字符串，用于描述滚动周期的基本单位，字符串的值及意义如下：
-“S”: Seconds
-“M”: Minutes
-“H”: Hours
-“D”: Days
-“W”: Week day (0=Monday)
-“midnight”: Roll over at midnight
+
+- “S”: Seconds
+- “M”: Minutes
+- “H”: Hours
+- “D”: Days
+- “W”: Week day (0=Monday)
+- “midnight”: Roll over at midnight
 
 interval: 滚动周期，单位有when指定，比如：when=’D’,interval=1，表示每天产生一个日志文件
 
