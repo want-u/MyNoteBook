@@ -57,13 +57,30 @@ ${user_host}${current_dir}${rvm_ruby}${git_branch}${venv_prompt} %{$fg[white]%}[
 %{$fg_bold[green]%}➜ %B${user_symbol}%b "
 
 # PS1变量修改，在.bashrc中追加【\t代表时间】
+vi ~/.bashrc
+
 PS1="
 ╭─\[\e[31;1m\]\u@\h\e[m \[\e[34;1m\]\w\e[m    \t
 ╰─\$ "
 
 PS1="
 \[\e[31;1m\]\u@\h\e[m \[\e[34;1m\]\w\e[m    \[\e[36;1m\]\t\e[m
-➜  
+➜ "
+
+PS1 可以支持以下这些选项：
+\d：显示曰期，格式为"星期 月 日"。
+\H：显示完整的主机名。如默认主机名"localhost.localdomain"。
+\h：显示简写的主机名。如默认主机名"localhost"。
+\t：显示 24 小时制时间，格式为"HH:MM:SS"。
+\T：显示 12 小时制时间，格式为"HH:MM:SS"。
+\A：显示 24 小时制时间，格式为"HH:MM"。
+\@：显示 12 小时制时间，格式为"HH:MM am/pm"。
+\u：显示当前用户名。
+\v：显示 Bash 的版本信息。
+\w：显示当前所在目录的完整名称。
+\W：显示当前所在目录的最后一个目录。
+\#：执行的第几条命令。
+\$：提示符。如果是 root 用户，则会显示提示符为"#"；如果是普通用户，则会显示提示符为"$"。
 ```
 
 
