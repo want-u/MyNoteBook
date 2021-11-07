@@ -1,4 +1,6 @@
 # logging-日志模块
+https://www.cnblogs.com/CJOKER/p/8295272.html
+[toc]
 
 用Python写代码的时候，在想看的地方写个print xx 就能在控制台上显示打印信息，这样子就能知道它是什么了
 
