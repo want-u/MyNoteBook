@@ -20,7 +20,9 @@ Markdown 是用来编写结构化文档的一种纯文本格式，它使我们�
 
 下载地址：https://www.typora.io/#windows
 
-主题地址：https://github.com/want-u/MyNoteBook/tree/master/.git_push/My-Typora-Themes
+- 主题地址：
+  - [Theigrams/My-Typora-Themes: A CSS style for Typora (github.com)](https://github.com/Theigrams/My-Typora-Themes)
+  - https://github.com/want-u/MyNoteBook/tree/master/.git_push/My-Typora-Themes
 
 - 【文件-偏好设置-外观-一体化】
 - 【文件-偏好设置-编辑器-拼写检查-不使用拼写检查】
@@ -197,7 +199,7 @@ https://blog.csdn.net/qq_42127861/article/details/119414585
     luoxian
     
     smms_secret_token：S7YnlHgz9xrTK81pTQT4hmEpDvWQNy77
-    
+
 ## 6. gitbook
 
 注册：https://www.gitbook.com/
