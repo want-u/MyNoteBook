@@ -5,6 +5,8 @@
 
 [toc]
 
+![image-20220204010545976](https://gitee.com/luoxian1011/pictures/raw/master//image-20220204010545976.png)
+
 生产服务器安装的Linux为Centos7.9，默认使用yum安装zsh只能到5.0.2版本；
 
 想要使用powerlevel10k主题就需要≥5.2版本的zsh。
@@ -171,7 +173,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting pip)
 个人推荐 `Fira Code` 和 `MesloLGS NF` 或可以使用这个仓库 https://github.com/powerline/fonts 中的任意字体。
 
 0. 安装 Hack Nerd Font
-    
+   
     字体官网链接：https://nerdfonts.com/
     下载字体 然后安装(Ubuntu Nerd Font Complete.ttf)
     [Hack.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip)

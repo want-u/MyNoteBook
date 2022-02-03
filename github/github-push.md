@@ -30,7 +30,6 @@ Windows Registry Editor Version 5.00
 4. 双击运行 new_md.reg，即可在右键新建添加md格式文件
 
 ```
-<<<<<<< HEAD
 Windows Registry Editor Version 5.00
 
 [HKEY_CLASSES_ROOT\.md]
@@ -50,7 +49,6 @@ Windows Registry Editor Version 5.00
 "Typora.md"=""
 
 [HKEY_CLASSES_ROOT\.md\ShellNew]
->>>>>>> 55bdf98f2e666f0992ead6e5e4d02be4a33c588b
 "NullFile"=""
 ```
 
