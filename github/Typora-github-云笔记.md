@@ -1,5 +1,7 @@
 # Typora-github-云笔记
 
+[toc]
+
 ## 1. Typora介绍
 
 ![img](https://www.typora.io/img/windows/screen2.png)
@@ -17,6 +19,8 @@ Markdown 是用来编写结构化文档的一种纯文本格式，它使我们�
 ### 1.1 Typora安装和设置
 
 下载地址：https://www.typora.io/#windows
+
+主题地址：https://github.com/want-u/MyNoteBook/tree/master/.git_push/My-Typora-Themes
 
 - 【文件-偏好设置-外观-一体化】
 - 【文件-偏好设置-编辑器-拼写检查-不使用拼写检查】
@@ -46,14 +50,20 @@ Git安装：https://git-scm.com/downloads
 
 
 ```
-git config --global user.email "youxiang"
-git config --global user.name "user"
+git config --global user.email "1846016614@qq.com"
+git config --global user.name "jianyue"
+
+# 生成密钥文件
 ssh-keygen -t rsa -C "sshkey"
 ```
 
 #### 2.2 添加公钥
 
 将ssh公钥添加到github的sshkeys中
+- 右上角 Settings
+- SSH and GPG keys
+- 克隆已有仓库
+git clone git@github.com:want-u/MyNoteBook.git
 
 #### 2.3 新建仓库
 
@@ -82,7 +92,19 @@ git push   git@github.com:yusenyi123/notebook.git  master
 
 git push  git@gitee.com:yusenyi/notebook.git master
 
+
+git remote add origin sqt@180.169.33.117:repositores/ZSKPad.git
+
+git remote －v 查看远程origin
+git remote rm origin 删除远程origin
+
 git push  origin master
+```
+
+```
+D:
+cd D:\MyNoteBook
+git add -A && git commit -m "commit" && git pull origin master && git push origin master
 ```
 
 
@@ -150,8 +172,18 @@ PicGo地址：https://github.com/Molunerfinn/PicGo
 
 ## 4. Gitee图床
 
-- gitee创建仓库
-- 添加私人令牌 [token]
+https://blog.csdn.net/qq_42127861/article/details/119414585
+
+- 下载插件，在插件设置里面搜索gitee，然后安装如下的插件：gitee-uploader 1.1.2
+
+- 跳转安装node.js：https://nodejs.org/en/
+
+- gitee创建仓库：
+- owner：luoxian1011
+- repo：luoxian1011/pictures
+- branch：master
+- 添加私人令牌 [右上角进入设置之后，一直向下拉，找到 私人令牌token：58cc18655510bf8fa7a1dd532e1956fc]
+- path：/ 或指定路径
 - PicGo安装gitee upload插件 [须有node.js环境]
 - 配置PicGo中的gitee图床参数
 - typora图片设置中：开启自动上传
@@ -159,9 +191,17 @@ PicGo地址：https://github.com/Molunerfinn/PicGo
 
 ![image-20201219033057608](https://gitee.com/luoxian1011/pictures/raw/master/image-20201219033057608.png)
 
-## 5. gitbook
+
+## 5. sm.ms图床
+
+    luoxian
+    
+    smms_secret_token：S7YnlHgz9xrTK81pTQT4hmEpDvWQNy77
+    
+## 6. gitbook
 
 注册：https://www.gitbook.com/
 
-- 创建空间
-- Integrations【集成】 —— github【√】 —— 将github中的项目同步到gitbook
+创建空间
+
+Integrations【集成】 —— github【√】 —— 将github中的项目同步到gitbook

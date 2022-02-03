@@ -19,11 +19,11 @@ git add -A
 git commit -am 'commit' 
 
 #删除master分支
-git branch -D main 
+git branch -D master
 
-#将当前所在的new_branch分支重命名为 main
-git branch -m main
+#将当前所在的new_branch分支重命名为 master
+git branch -m master
 
 #将更改强制推送到github仓库
-git push origin main --force
+git push origin master --force
 ```

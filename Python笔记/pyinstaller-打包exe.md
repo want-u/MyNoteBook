@@ -1,0 +1,32 @@
+# pyinstaller
+- https://blog.csdn.net/u014535666/article/details/106737226
+- https://www.cnblogs.com/xp1315458571/p/13816210.html
+
+## 发布命令介绍
+
+有两种方法调用发布流程：
+- ①直接使用Pyinstaller应用程序调用待发布脚本
+- ②用Python调用pyinstaller-script脚本再调用待发布脚本
+
+两种方法用起来没什么差别，方法①少个步骤，就用方法①了咯
+
+
+```
+-w指令
+直接发布的exe应用带命令行调试窗口，在指令内加入-w命令可以屏蔽
+
+-F指令
+注意指令区分大小写。这里是大写。使用-F指令可以把应用打包成一个独立的exe文件，否则是一个带各种dll和依赖文件的文件夹
+
+-p指令
+这个指令后面可以增加pyinstaller搜索模块的路径。因为应用打包涉及的模块很多。这里可以自己添加路径。不过经过笔者测试，site-packages目录下都是可以被识别的，不需要再手动添加
+
+END
+发布和发布路径
+使用下面的完整发布命令发布独立exe应用
+发布文件的路径为默认的命令行窗口路径下
+
+打包时加入 参数 --noconsole
+pyinstaller xxx.py --noconsole  # 不打包为一个文件，打开速度快
+pyinstaller -F xxx.py --noconsole  # 打包为一个文件
+```
